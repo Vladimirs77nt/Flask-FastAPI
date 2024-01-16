@@ -1,0 +1,10 @@
+<div style="display: flex; gap: 50px">
+    {% for s in data_student %}
+    <div>
+        <p>Имя: {{s.name}}</p>
+        <p>Фамилия: {{s.familia}}</p>
+        <p>Возраст: {{s.age}}</p>
+        <p>Средний балл: {{s.average}}</p>
+    </div>
+    {% endfor %}
+</div>
