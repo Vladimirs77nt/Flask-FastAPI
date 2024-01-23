@@ -1,3 +1,6 @@
+# СЕМИНАР №1
+# -----------------------
+
 from flask import Flask
 from flask import render_template
 
@@ -60,18 +63,22 @@ def html_get():
 @app.route("/student/")
 def student():
     data_student = [
-        {"name": "Иван",
-         "familia": "Федоров",
+        {"first_name": "Иван",
+         "last_name": "Федоров",
          "age": "20",
-         "average": "4.5"},
-         {"name": "Борис",
-         "familia": "Мосеев",
+         "average_score": "4.5"},
+         {"first_name": "Борис",
+         "last_name": "Мосеев",
          "age": "18",
-         "average": "5"},
-         {"name": "Дмитрий",
-         "familia": "Гаврилов",
+         "average_score": "5"},
+         {"first_name": "Дмитрий",
+         "last_name": "Гаврилов",
          "age": "25",
-         "average": "3.5"},
+         "average_score": "3.5"},
+         {"first_name": "Евгений",
+         "last_name": "Болотов",
+         "age": "32",
+         "average_score": "4.8"},
     ]
     return render_template('student.html', data_student=data_student)
 
@@ -97,7 +104,6 @@ def news(num):
          "date": "12.01.2024"},
     ]
     return render_template('news.html', news=data_news[num-1])
-
 
 
 # -----------------------
