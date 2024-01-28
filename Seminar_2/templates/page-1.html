@@ -1,6 +1,12 @@
-{% extends 'base.html' %} {% block title %} {{ super() }} - {{ title }} {% endblock %} {% block content %}
-<div>
-    <h1>Главная</h1>
-    <a href="/page-2/">Нажми на меня !</a>
-</div>
+{% extends 'base.html' %}
+
+{% block title %} {{ super() }} - {{ title }} {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Главная</h1>
+        <a href="{{ url_for('page_2') }}">Нажми на меня !</a><br>
+        <a href="{{ url_for('load_image') }}">Загрузка изображения</a><br>
+        <a href="{{ url_for('auth') }}">Авторизация</a><br>
+    </div>
 {% endblock %}
