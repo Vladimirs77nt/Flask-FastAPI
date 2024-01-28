@@ -4,11 +4,10 @@
 
 {% block content %}
     <div>
-        <h1>АВТОРИЗАЦИЯ (Задача 3 / page-4)</h1><br>
+        <h1>ОТПРАВКА ТЕКСТА (Задача 4 / page-5)</h1><br>
 
-        <form action="{{ url_for('auth') }}" method="post" enctype="multipart/form-data">
-            <input type="text" name="login" placeholder="Enter login">
-            <input type="password" name="password" placeholder="Enter password">
+        <form action="{{ url_for('send_text') }}" method="post">
+            <input type="text" name="text" placeholder="Введите текст">
             <input type="submit" value="Отправить">
         </form>
         <br>

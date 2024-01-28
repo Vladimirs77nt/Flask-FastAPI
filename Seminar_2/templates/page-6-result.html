@@ -4,9 +4,11 @@
 
 {% block content %}
     <div>
-        <h1>АВТОРИЗАЦИЯ ПРОШЛА УСПЕШНО !!! (page-4-succ)</h1><br>
+        <h3>
+            Результат {{ operation_text }} чисел {{ num_1 }} и {{ num_2 }} равен {{ result }}
+        </h3>
 
-        <a href="{{ url_for('load_image') }}">Загрузка изображения</a><br>
+        <br>
         <a href="{{ url_for('page_main') }}">Вернутся на главную</a><br>
     </div>
 {% endblock %}
