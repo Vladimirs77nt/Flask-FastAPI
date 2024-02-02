@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ super() }} - {{ title }} {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Регистрация</h1>
+
+        <form method="POST" action="{{ url_for('register') }}">
+            {{ form.csrf_token }}
+            {% for field in form if field.name != 'csrf_token' %}
+                <p>{{ field.label }}<br>
+                {{ field }}
+                {% if field.errors %}
+                    <ul class="alert alert-danger">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                </p>
+            {% endfor %}
+
+            <p><input type="submit" value="Register"></p>
+        </form>
+
+        <br>
+        <a href="{{ url_for('page_main') }}">Вернутся на главную</a><br>
+    </div>
+{% endblock %}

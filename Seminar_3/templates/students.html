@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ super() }} - {{ title }} {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Студенты</h1>
+        <br>
+
+        {% for student in students %}
+            <p>{{ student.name }} {{ student.surname }}, {{ student.age }}, факультет: {{ student.id_faculty }}</p>
+            <br>
+        {% endfor %}
+
+        <br>
+        <a href="{{ url_for('page_main') }}">Вернутся на главную</a><br>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ super() }} - {{ title }} {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Факультеты</h1>
+        <br>
+
+        {% for faculty_item in faculty %}
+            <p>Номер факультета: {{faculty_item.id }}</p>
+            <p>Название факультета: {{faculty_item.name_faculty }}</p>
+            <br>
+        {% endfor %}
+
+        <br>
+        <a href="{{ url_for('page_main') }}">Вернутся на главную</a><br>
+    </div>
+{% endblock %}

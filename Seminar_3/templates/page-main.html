@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ super() }} - {{ title }} {% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Главная (шаблон)</h1>
+        <a href="{{ url_for('students') }}">Студенты (задание 1, для apk_1)</a><br>
+        <a href="{{ url_for('faculty') }}">Факультеты (задание 1, для apk_1)</a><br><br>
+
+        <a href="{{ url_for('users') }}">Пользователи (задание 8, для apk_8)</a><br>
+        <a href="{{ url_for('register') }}">Регистрация (задание 8, для apk_8)</a><br>
+        <a href="{{ url_for('login') }}">Авторизация (задание 8, для apk_8)</a><br>
+
+    </div>
+{% endblock %}
