@@ -19,7 +19,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
 db.init_app(app)
 csrf = CSRFProtect(app)
 
-
 # -----------------------
 # инициализация базы
 @app.cli.command("init-db")
@@ -89,15 +88,6 @@ def add_users():
         db.session.commit()
     print("10 пользователей - добавлены!")
 
-# инициализация и заполнение базы данных
-@app.cli.command("start-db")
-def start_db():
-    init_db()
-    add_faculty()
-    add_students(10)
-    add_users(10)
-    print('Data Bases - ЗАПОЛНЕНА !!!')
-
 
 # -----------------------
 # главная страница
@@ -152,11 +142,22 @@ def register():
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate():
-        # Обработка данных из формы
-        print("авторизация успешна!")
-        return "--- АВТОРИЗАЦИЯ УСПЕШНА! ---"
+        user = find_user(form.email.data)
+        if user:
+            if user.password == form.password.data:
+                print("авторизация успешна!")
+                return "--- АВТОРИЗАЦИЯ УСПЕШНА !!! ---<br><br><a href='/'>Вернутся на главную</a><br>"
+            else:
+                print("авторизация НЕ ПРОЙДЕНА")
+                return "--- АВТОРИЗАЦИЯ НЕ ПРОЙДЕНА !!! ---<br><br><a href='/'>Вернутся на главную</a><br>"
     return render_template('login.html', form=form)
 
+def find_user(email):
+    users = Users.query.all()
+    for user in users:
+        if user.email == email:
+            return user
+    return False
 
     
 

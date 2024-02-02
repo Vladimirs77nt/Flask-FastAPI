@@ -4,12 +4,12 @@
 
 {% block content %}
 
-    <h1>Авторищация</h1>
+    <h1>Авторизация</h1>
     <form method="POST" action="{{ url_for('login') }}">
     {{ form.csrf_token }}
     <p>
-    {{ form.username.label }}<br>
-    {{ form.username(size=32) }}
+    {{ form.email.label }}<br>
+    {{ form.email(size=32) }}
     </p>
     <p>
     {{ form.password.label }}<br>
