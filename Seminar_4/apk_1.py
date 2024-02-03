@@ -24,7 +24,7 @@ urls = ['https://gb.ru/',
 
 def download(url):
     response = requests.get(url)
-    filename = 'Seminar_4/task_1_potok_' + url.replace('https://','').split('/')[0] + '.html'
+    filename = 'Seminar_4/files_parser/task_1_potok_' + url.replace('https://','').split('/')[0] + '.html'
     with open(filename, "w", encoding='utf-8') as f:
         f.write(response.text)
 

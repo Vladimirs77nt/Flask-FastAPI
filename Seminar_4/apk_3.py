@@ -26,7 +26,7 @@ async def download(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             text = await response.text()
-            filename = 'Seminar_4/task_3_async_' + url.replace('https://','').split('/')[0] + '.html'
+            filename = 'Seminar_4/files_parser/task_3_async_' + url.replace('https://','').split('/')[0] + '.html'
             with open(filename, "w", encoding='utf-8') as f:
                 f.write(text)
 

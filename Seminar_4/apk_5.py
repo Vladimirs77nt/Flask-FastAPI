@@ -14,7 +14,6 @@ def count_word(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         text = f.read()
         count = len(text.split())
-        # print (f"{file_path} содержит {count} слов")
         return count
   
 # -----------------------
