@@ -60,11 +60,11 @@ products = sqlalchemy.Table("products", metadata,
 # Таблица заказов (orders) содержит следующие поля:
 #   id (PRIMARY KEY), id пользователя (FOREIGN KEY), id товара (FOREIGN KEY), дата заказа и статус заказа.
 orders = sqlalchemy.Table("orders", metadata,
-                         sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),                 # ID номер заказа
-                         sqlalchemy.Column("id_user", sqlalchemy.ForeignKey("users.id")),              # ID пользователя
-                         sqlalchemy.Column("id_product", sqlalchemy.ForeignKey("products.id")),         # ID товара
-                         sqlalchemy.Column("order_time", sqlalchemy.DateTime(), default=datetime.datetime.now),  # время создания заказа
-                         sqlalchemy.Column("status", sqlalchemy.String(16)), )                          # статус заказа
+                         sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),             # ID номер заказа
+                         sqlalchemy.Column("id_user", sqlalchemy.ForeignKey("users.id")),           # ID пользователя
+                         sqlalchemy.Column("id_product", sqlalchemy.ForeignKey("products.id")),     # ID товара
+                         sqlalchemy.Column("order_time", sqlalchemy.DateTime()),                    # время создания заказа
+                         sqlalchemy.Column("status", sqlalchemy.String(16)), )                      # статус заказа
 
 engine = sqlalchemy.create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 metadata.create_all(engine)
@@ -99,11 +99,11 @@ class OrderIn(BaseModel):
     id_user: int
     id_product: int
     status: str = Field(max_length=32)
+    order_time: datetime.datetime
 
-# Класс "Order" - вторая модель используется для возврата данных о заказе из БД клиенту (содержит ID заказа и время заказа)
+# Класс "Order" - вторая модель используется для возврата данных о заказе из БД клиенту (содержит ID заказа)
 class Order(OrderIn):
     id: int
-    order_time: datetime.datetime.now()
 
 
 #--------------------------------------------------------------------------------------------------------
@@ -166,6 +166,7 @@ async def create_test_orders(count: int):
             status_=random.choice(status_list)
             query = orders.insert().values(id_user=id_user_,
                                            id_product=id_product_,
+                                           order_time=datetime.datetime.now(),
                                            status=status_)
             await database.execute(query)
             print(id_user_, id_product_, status_)
@@ -258,6 +259,7 @@ async def delete_product(product_id: int):
 async def create_order(order: OrderIn):
     query = orders.insert().values(id_user=order.id_user,
                                    id_product=order.id_product,
+                                   order_time=datetime.datetime.now(),
                                    status=order.status)
     last_record_id = await database.execute(query)
     return {**order.dict(), "id": last_record_id}
